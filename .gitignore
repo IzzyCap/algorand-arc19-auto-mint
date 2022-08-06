@@ -1,0 +1,5 @@
+config/local*
+node_modules
+build/
+
+!config/local-example.cjs

@@ -1,0 +1,24 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "skipLibCheck": true,   
+    "module": "ESNext",
+    "target": "ESNext",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "strict": true,
+    "outDir": "build",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": false,
+    "importHelpers": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Node",
+    "esModuleInterop": true
+  },
+  "include": ["./src/", "./config/"],
+  "exclude": ["node_modules"],
+  "ts-node": {
+    "files": true
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "algorand-arc19-auto-mint",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "tsc -p tsconfig.json && node --experimental-specifier-resolution=node build/index.js"
+  },
+  "keywords": [],
+  "author": "izzy",
+  "license": "ISC",
+  "dependencies": {
+    "@pinata/sdk": "^1.1.26",
+    "algosdk": "^1.19.0",
+    "config": "^3.3.6",
+    "multiformats": "^9.7.1"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.2",
+    "@types/config": "^0.0.40",
+    "@types/fluent-ffmpeg": "^2.1.20",
+    "@types/node": "^16.11.11",
+    "@types/qs": "^6.9.7",
+    "@types/sharp": "^0.29.5",
+    "@types/temp": "^0.9.1",
+    "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.5.0",
+    "@typescript-eslint/parser": "^5.5.0",
+    "eslint": "7.32",
+    "eslint-config-airbnb": "^19.0.2",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.15",
+    "prettier": "2.5.0",
+    "prisma": "^3.9.1",
+    "typescript": "^4.5.2"
+  }
+}
