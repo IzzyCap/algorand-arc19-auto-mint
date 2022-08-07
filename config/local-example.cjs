@@ -15,4 +15,9 @@ module.exports = {
     apiSecret:
       'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', // pinata.cloud api secret
   },
+  algorand: {
+    token: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    server: 'https://mainnet-algorand.api.purestake.io/ps2',
+    port: '',
+  },
 };
