@@ -13,3 +13,5 @@ On this project, you will find an example for minting automatically a small coll
 5. Use the command `yarn start` to start minting the ARC19 NFTs.
 
 > You can use the function `configArc19(assetID, cid, reserveAddress)` from `/src/index.ts` to update the minted NFTs.
+
+> If you are using Purestake API, you will need to change the token value on file `/src/lib/algorand/index.ts`

@@ -9,6 +9,7 @@ const token = {
 */
 //Comment next line if using Purestake
 const token = config.get('algorand.token');
+
 const port = config.get('algorand.port') as string;
 const server = config.get('algorand.server') as string;
 export const algodClient: algosdk.Algodv2 = new algosdk.Algodv2(
