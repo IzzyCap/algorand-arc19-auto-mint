@@ -7,8 +7,8 @@ const token = {
   'x-api-key': config.get('algorand.token') as string,
 };
 */
-//Comment next line if using Purestake
-const token = config.get('algorand.token');
+// Comment next line if using Purestake
+const token = config.get('algorand.token') as string;
 
 const port = config.get('algorand.port') as string;
 const server = config.get('algorand.server') as string;

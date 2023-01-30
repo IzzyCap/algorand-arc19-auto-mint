@@ -1,17 +1,13 @@
 import algosdk from 'algosdk';
 import config from 'config';
 import { TextEncoder } from 'util';
+import * as fs from 'fs';
 import { algodClient, getAccount, getAsset } from './lib/algorand';
 import { cidToReserveURL, pinFile } from './lib/pinata';
 
 // Create Asset with ARC19
 // eslint-disable-next-line no-unused-vars
-async function createArc19(
-  i: number,
-  cid: string,
-  url: string,
-  reserveAddress: string
-) {
+async function createArc19(i: number, cid: string, url: string) {
   try {
     const account = await getAccount();
 
@@ -39,7 +35,17 @@ async function createArc19(
       properties: {}, // Here you can add traits info for rarity!
     };
 
-    console.log(note);
+    // Create json metadata file
+    await fs.writeFile(
+      `./metadata/Level 1/${i}.json`,
+      JSON.stringify(note),
+      error => {
+        if (error) throw error;
+      }
+    );
+    // Pin metadata
+    const pinNote = await pinFile(`./metadata/Level 1/${i}.json`);
+    const { reserveAddress } = cidToReserveURL(pinNote.IpfsHash);
 
     const encNote: Uint8Array = enc.encode(JSON.stringify(note));
 
@@ -80,17 +86,13 @@ async function createArc19(
 
     return true;
   } catch (error) {
-    console.log('Error');
+    console.log(error);
     return false;
   }
 }
 
 // eslint-disable-next-line no-unused-vars
-async function configArc19(
-  assetID: number,
-  cid: string,
-  reserveAddress: string
-) {
+async function configArc19(assetID: number, cid: string) {
   try {
     console.log(`Updating ARC19 to ${assetID}`);
     const account = await getAccount();
@@ -112,6 +114,18 @@ async function configArc19(
       image_mimetype: config.get('collection.image_mimetype'),
       properties: {}, // Here you can add traits info for rarity!
     };
+
+    // Create json metadata file
+    await fs.writeFile(
+      `./metadata/Level 2/${assetID}.json`,
+      JSON.stringify(note),
+      error => {
+        if (error) throw error;
+      }
+    );
+    // Pin metadata
+    const pinNote = await pinFile(`./metadata/Level 2/${assetID}.json`);
+    const { reserveAddress } = cidToReserveURL(pinNote.IpfsHash);
 
     const enc = new TextEncoder();
     const encNote: Uint8Array = enc.encode(JSON.stringify(note));
@@ -165,8 +179,8 @@ async function startMint(supply: number) {
     const resultFile = await pinFile(`./images/Level 1/${i}.png`);
 
     // Generate url and reserveAddress from image
-    const { url, reserveAddress } = cidToReserveURL(resultFile.IpfsHash);
-    await createArc19(i, resultFile.IpfsHash, url, reserveAddress);
+    const { url } = cidToReserveURL(resultFile.IpfsHash);
+    await createArc19(i, resultFile.IpfsHash, url);
 
     console.log(`End ${config.get('collection.name') + i.toString()} mint\n`);
   }
@@ -181,7 +195,7 @@ async function startMint(supply: number) {
   // const resultFile = await pinFile(`./images/Level 2/1.png`);
   // const { reserveAddress } = cidToReserveURL(resultFile.IpfsHash);
 
-  // configArc19(831712015, resultFile.IpfsHash, reserveAddress);
+  // configArc19(1026082455, resultFile.IpfsHash, reserveAddress);
 })().catch(e => {
   console.log(e);
 });
